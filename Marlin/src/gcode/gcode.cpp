@@ -65,6 +65,10 @@ GcodeSuite gcode;
   #include "../feature/password/password.h"
 #endif
 
+#if ENABLED(XGZP6859D_ENABLE)
+  #include "../feature/xgzp6859d.h"
+#endif
+
 #if HAS_FANCHECK
   #include "../feature/fancheck.h"
 #endif
@@ -1050,6 +1054,12 @@ void GcodeSuite::process_parsed_command(const bool no_ok/*=false*/) {
         case 869: M869(); break;                                  // M869: Report axis error
       #endif
 
+      #if ENABLED(XGZP6859D_ENABLE)
+        case 970:
+          M970();
+          break;
+      #endif
+
       #if ENABLED(MAGNETIC_PARKING_EXTRUDER)
         case 951: M951(); break;                                  // M951: Set Magnetic Parking Extruder parameters
       #endif
@@ -1126,6 +1136,40 @@ void GcodeSuite::process_parsed_command(const bool no_ok/*=false*/) {
 
 #if ENABLED(M100_FREE_MEMORY_DUMPER)
   void M100_dump_routine(FSTR_P const title, const char * const start, const uintptr_t size);
+#endif
+  
+#if ENABLED(XGZP6859D_ENABLE)
+  void GcodeSuite::M970() {
+
+    const int8_t sensor = parser.intval('P', -1);
+
+    if (sensor < 0 || sensor >= XGZP6859D_SENSOR_COUNT) {
+      SERIAL_ECHOLNPGM(
+        "Error: M970 requires P0 or P1"
+      );
+      return;
+    }
+
+    XGZP6859D *s;
+
+    if (sensor == 0)
+      s = &xgzp_sensor_0;
+    else
+      s = &xgzp_sensor_1;
+
+    if (!s->read()) {
+      SERIAL_ECHOLNPGM(
+        "Error: XGZP sensor unavailable"
+      );
+      return;
+    }
+
+    SERIAL_ECHOPGM("XGZP");
+    SERIAL_ECHO(sensor);
+    SERIAL_ECHOPGM(": ");
+    SERIAL_ECHO(s->pressure_pa());
+    SERIAL_ECHOLNPGM(" Pa");
+  }
 #endif
 
 /**

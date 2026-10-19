@@ -439,6 +439,46 @@
 #endif
 
 //===========================================================================
+//========================== Vacuum Pressure Sensors ========================
+//===========================================================================
+
+// Two XGZP6859D sensors, both at I2C address 0x6D.
+// Each sensor is connected to its own software-I2C bus.
+//
+// EXP2:
+//   Pin 1 PA6 = Sensor 0 SCL
+//   Pin 2 PA5 = Sensor 0 SDA
+//   Pin 3 PE9 = Sensor 1 SCL
+//   Pin 4 PA4 = Sensor 1 SDA
+//
+// Both sensors:
+//   Pin 9  = GND
+//   Pin 10 = 3.3V
+
+#define XGZP6859D_ENABLE
+
+#define XGZP6859D_SENSOR_COUNT 2
+
+#define XGZP6859D_S0_SCL_PIN PA6
+#define XGZP6859D_S0_SDA_PIN PA5
+
+#define XGZP6859D_S1_SCL_PIN PE9
+#define XGZP6859D_S1_SDA_PIN PA4
+
+#define XGZP6859D_I2C_ADDRESS 0x6D
+
+// Pressure conversion factor K.
+//
+// IMPORTANT: Change this to match the exact pressure-range variant
+// of your XGZP6859D.
+//
+// Example:
+//   -100...+100 kPa => K = 64
+//
+// See the XGZP6859D datasheet for other pressure ranges.
+#define XGZP6859D_PRESSURE_K 64
+
+//===========================================================================
 //============================= Thermal Settings ============================
 //===========================================================================
 // @section temperature

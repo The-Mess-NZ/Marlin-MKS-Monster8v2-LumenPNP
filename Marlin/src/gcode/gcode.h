@@ -1206,6 +1206,10 @@ private:
     static void M951();
   #endif
 
+  #if ENABLED(XGZP6859D_ENABLE)
+    static void M970();
+  #endif
+  
   #if ENABLED(TOUCH_SCREEN_CALIBRATION)
     static void M995();
   #endif
