@@ -963,6 +963,8 @@ void GcodeSuite::process_parsed_command(const bool no_ok/*=false*/) {
         case 672: M672(); break;                                  // M672: Set/clear Duet Smart Effector sensitivity
       #endif
 
+      case 700: M700(); break;                                    // M700: Set vacuum pump PWM
+
       #if ENABLED(FILAMENT_LOAD_UNLOAD_GCODES)
         case 701: M701(); break;                                  // M701: Load Filament
         case 702: M702(); break;                                  // M702: Unload Filament

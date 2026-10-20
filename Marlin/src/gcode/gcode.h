@@ -268,6 +268,7 @@
  *        Set Polargraph draw area and belt length: "M665 S<segments-per-second> L<draw-area-left> R<draw-area-right> T<draw-area-top> B<draw-area-bottom> H<max-belt-length>"
  * M666 - Set/get offsets for delta (Requires DELTA) or dual endstops. (Requires [XYZ]_DUAL_ENDSTOPS)
  * M672 - Set/Reset Duet Smart Effector's sensitivity. (Requires DUET_SMART_EFFECTOR and SMART_EFFECTOR_MOD_PIN)
+ * M700 - Set vacuum pump PWM: P<pump> S<pwm>. P0=HBED(PB10), P1=HE0(PB1). (Requires VACUUM_PUMP_PWM)
  * M701 - Load filament (Requires FILAMENT_LOAD_UNLOAD_GCODES)
  * M702 - Unload filament (Requires FILAMENT_LOAD_UNLOAD_GCODES)
  * M808 - Set or Goto a Repeat Marker (Requires GCODE_REPEAT_MARKERS)
@@ -695,6 +696,8 @@ private:
   static void M75();
   static void M76();
   static void M77();
+
+  static void M700();
 
   #if ENABLED(PRINTCOUNTER)
     static void M78();
