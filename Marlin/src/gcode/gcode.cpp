@@ -964,6 +964,7 @@ void GcodeSuite::process_parsed_command(const bool no_ok/*=false*/) {
       #endif
 
       case 700: M700(); break;                                    // M700: Set vacuum pump PWM
+      case 703: M703(); break;                                    // M703: Set vacuum pump solenoid on/off
 
       #if ENABLED(FILAMENT_LOAD_UNLOAD_GCODES)
         case 701: M701(); break;                                  // M701: Load Filament

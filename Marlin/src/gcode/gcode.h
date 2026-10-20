@@ -271,6 +271,7 @@
  * M700 - Set vacuum pump PWM: P<pump> S<pwm>. P0=HBED(PB10), P1=HE0(PB1). (Requires VACUUM_PUMP_PWM)
  * M701 - Load filament (Requires FILAMENT_LOAD_UNLOAD_GCODES)
  * M702 - Unload filament (Requires FILAMENT_LOAD_UNLOAD_GCODES)
+ * M703 - Set vacuum pump solenoid on/off: P<pump solenoid> S<state>. P0=HE1, P1=HE2. (Requires VACUUM_PUMP_SOLENOID)
  * M808 - Set or Goto a Repeat Marker (Requires GCODE_REPEAT_MARKERS)
  * M810-M819 - Define/execute a G-code macro (Requires GCODE_MACROS)
  * M851 - Set Z probe's XYZ offsets in current units. (Negative values: X=left, Y=front, Z=below)
@@ -698,6 +699,7 @@ private:
   static void M77();
 
   static void M700();
+  static void M703();
 
   #if ENABLED(PRINTCOUNTER)
     static void M78();
